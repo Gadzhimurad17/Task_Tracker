@@ -1,0 +1,4 @@
+/home/gadzhimurad/Task_Tracker/include/CMakeFiles/TaskManager.dir
+/home/gadzhimurad/Task_Tracker/include/CMakeFiles/clang-format.dir
+/home/gadzhimurad/Task_Tracker/include/CMakeFiles/edit_cache.dir
+/home/gadzhimurad/Task_Tracker/include/CMakeFiles/rebuild_cache.dir
