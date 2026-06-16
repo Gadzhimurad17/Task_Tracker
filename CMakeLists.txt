@@ -26,6 +26,7 @@ set(SOURCES
     # src/repository/PostgresTask.cpp
     # src/controllers/Controller.cpp
     # src/models/historymanager/HistoryManager.cpp
+    src/models/repository/TaskCommentsRepo.cpp
     src/models/repository/ProjectsRepo.cpp
     src/models/repository/RolesRepo.cpp
     src/models/repository/DatabaseManager.cpp

@@ -4,17 +4,17 @@ namespace Entities {
 class TaskComments {
 private:
     unsigned int comment_id;
-    std::string &comment_text;
     unsigned int task_id;
     unsigned int user_id;
+    std::string &comment_text;
 
 public:
-    TaskComments(unsigned int comment_id_l, std::string &comment_text_, unsigned int task_id_,
-                 unsigned int user_id_) noexcept;
+    TaskComments(unsigned int comment_id_l,unsigned int task_id_,
+                 unsigned int user_id_,std::string &comment_text_);
 
     unsigned int GetCommentId() const;
-    std::string &GetProjectName() const;
     unsigned int GetTaskId() const;
     unsigned int GetUserId() const;
+    std::string &GetCommentText() const;
 };
 }  // namespace Entities
