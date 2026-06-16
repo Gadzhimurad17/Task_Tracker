@@ -16,7 +16,7 @@
 #include <QVBoxLayout>
 #include <memory>
 #include <pqxx/pqxx>
-int main(int argc, char *argv[]) {
+int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
 #if 0
     QApplication app(argc, argv);
     View::MainWindow window{};

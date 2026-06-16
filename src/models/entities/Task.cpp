@@ -1,32 +1,27 @@
 #include "models/entities/Task.hpp"
 
-namespace Entities
-{
+namespace Entities {
 
-Task::Task(const Status &status_, const std::string &title_, const Priority &priority_,
+Task::Task(const Status &status_, const std::string &task_name_, const Priority &priority_,
            const std::string &description_, unsigned int created_by_, unsigned int assigned_to_,
            const std::string &deadline_)
-    : status(status_), title(title_), priority(priority_), description(description_),
-      created_by(created_by_), assigned_to(assigned_to_), deadline(deadline_)
-{
+    : status(status_), task_name(task_name_), priority(priority_), description(description_), created_by(created_by_),
+      assigned_to(assigned_to_), deadline(deadline_) {
     task_id = ++counter;
 }
 
 Task::Task(const Task &other)
-    : task_id(other.task_id), status(other.status), title(other.title), priority(other.priority),
+    : task_id(other.task_id), status(other.status), task_name(other.task_name), priority(other.priority),
       description(other.description), created_by(other.created_by), assigned_to(other.assigned_to),
-      deadline(other.deadline)
-{
-}
+      deadline(other.deadline) {}
 
-Task &Task::operator=(const Task &other)
-{
+Task &Task::operator=(const Task &other) {
     if (this == &other)
         return *this;
 
     task_id = other.task_id;
     status = other.status;
-    title = other.title;
+    task_name = other.task_name;
     priority = other.priority;
     description = other.description;
     created_by = other.created_by;
@@ -36,14 +31,13 @@ Task &Task::operator=(const Task &other)
     return *this;
 }
 
-Task &Task::operator=(Task &&other) noexcept
-{
+Task &Task::operator=(Task &&other) noexcept {
     if (this == &other)
         return *this;
 
     std::swap(task_id, other.task_id);
     std::swap(status, other.status);
-    std::swap(title, other.title);
+    std::swap(task_name, other.task_name);
     std::swap(priority, other.priority);
     std::swap(description, other.description);
     std::swap(created_by, other.created_by);
@@ -54,49 +48,26 @@ Task &Task::operator=(Task &&other) noexcept
 }
 
 Task::Task(Task &&other) noexcept
-    : task_id(other.task_id), status(other.status), title(other.title), priority(other.priority),
+    : task_id(other.task_id), status(other.status), task_name(other.task_name), priority(other.priority),
       description(other.description), created_by(other.created_by), assigned_to(other.assigned_to),
-      deadline(other.deadline)
-{
+      deadline(other.deadline) {
     other.task_id = 0;
 }
 
-unsigned int Task::GetTaskId() const
-{
-    return task_id;
-}
-Status Task::GetStatus() const
-{
-    return this->status;
-}
-const std::string Task::GetTitle() const
-{
-    return this->title;
-}
-Priority Task::GetPriority() const
-{
-    return this->priority;
-}
-const std::string &Task::GetDescription() const
-{
-    return this->description;
-}
-unsigned int Task::GetCreatedBy() const
-{
-    return this->created_by;
-}
-unsigned int Task::GetAssignedTo() const
-{
-    return this->assigned_to;
-}
-const std::string &Task::GetDeadline() const
-{
-    return this->deadline;
-}
-std::string Task::PriorityToString(Priority p)
-{
-    switch (p)
-    {
+unsigned int Task::GetTaskId() const { return task_id; }
+Status Task::GetStatus() const { return this->status; }
+
+const std::string Task::GetTaskName() const { return this->task_name; }
+Priority Task::GetPriority() const { return this->priority; }
+
+const std::string &Task::GetDescription() const { return this->description; }
+unsigned int Task::GetCreatedBy() const { return this->created_by; }
+
+unsigned int Task::GetAssignedTo() const { return this->assigned_to; }
+const std::string &Task::GetDeadline() const { return this->deadline; }
+
+std::string Task::PriorityToString(Priority p) {
+    switch (p) {
     case Priority::critical:
         return "critical";
     case Priority::high:
@@ -109,10 +80,8 @@ std::string Task::PriorityToString(Priority p)
     return "Unknown";
 }
 
-std::string Task::StatusToString(Status s)
-{
-    switch (s)
-    {
+std::string Task::StatusToString(Status s) {
+    switch (s) {
     case Status::completed:
         return "completed";
     case Status::created:
@@ -128,4 +97,4 @@ std::string Task::StatusToString(Status s)
 }
 unsigned int Task::counter = 0;
 
-} // namespace Entities
+}  // namespace Entities

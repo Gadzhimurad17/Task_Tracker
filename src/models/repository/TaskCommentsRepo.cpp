@@ -33,7 +33,7 @@ void TaskCommentsRepo::Remove(unsigned int entity_id) {
 
     const std::string query = R"(
             DELETE FROM task_comments
-            WHERE role_id=$1
+            WHERE comment_id=$1
         )";
 
     txn.exec_params(query, entity_id);

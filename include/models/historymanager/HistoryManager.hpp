@@ -2,12 +2,10 @@
 #include <stack>
 // #include <memory>
 #include "../Task.hpp"
-namespace Entities
-{
-class HistoryManager
-{
+namespace Entities {
+class HistoryManager {
 
-  public:
+public:
     std::stack<Task> undoHistory;
     std::stack<Task> redoHistory;
     HistoryManager() = default;
@@ -16,4 +14,4 @@ class HistoryManager
     void AddInUndo(const Task &task);
     void AddInRedo(const Task &task);
 };
-} // namespace Entities
+}  // namespace Entities

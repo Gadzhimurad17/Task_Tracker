@@ -30,6 +30,7 @@ set(SOURCES
     src/models/repository/ProjectsRepo.cpp
     src/models/repository/RolesRepo.cpp
     src/models/repository/DatabaseManager.cpp
+    src/models/repository/TaskRepo.cpp
 )
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 set(HEADERS
@@ -44,13 +45,13 @@ set(HEADERS
     include/models/repository/TaskCommentsRepo.hpp
     include/models/entities/Users.hpp
 
-    # include/repository/PostgresTask.hpp
     # include/models/historymanager/HistoryManager.hpp
     include/models/entities/Projects.hpp
     include/models/entities/TaskComments.hpp
     include/models/entities/Roles.hpp
     include/models/repository/DatabaseManager.hpp
     include/models/exceptions/CustomExceptions.hpp
+    include/models/repository/TaskRepo.hpp
 )
 
 add_executable(TaskManager ${SOURCES} ${HEADERS})
