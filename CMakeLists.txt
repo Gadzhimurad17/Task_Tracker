@@ -31,6 +31,7 @@ set(SOURCES
     src/models/repository/RolesRepo.cpp
     src/models/repository/DatabaseManager.cpp
     src/models/repository/TaskRepo.cpp
+    src/models/repository/UsersRepo.cpp
 )
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 set(HEADERS
@@ -43,10 +44,11 @@ set(HEADERS
     include/models/repository/ProjectsRepo.hpp
     include/models/repository/RolesRepo.hpp
     include/models/repository/TaskCommentsRepo.hpp
-    include/models/entities/Users.hpp
+    include/models/repository/UsersRepo.hpp
 
     # include/models/historymanager/HistoryManager.hpp
     include/models/entities/Projects.hpp
+    include/models/entities/Users.hpp
     include/models/entities/TaskComments.hpp
     include/models/entities/Roles.hpp
     include/models/repository/DatabaseManager.hpp
