@@ -2,7 +2,7 @@
 namespace Repository {
 UsersRepo::UsersRepo(DatabaseManager &db_) : db(db_) {}
 
-void UsersRepo::Create(const Entities::Users &entity) {
+void UsersRepo::Create(const Entities::Users &entity) const {
     pqxx::work txn(db.GetConn());
 
     std::string query{R"(

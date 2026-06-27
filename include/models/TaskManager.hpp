@@ -3,15 +3,13 @@
 // #include <memory>
 #include "historymanager/HistoryManager.hpp"
 #include <vector>
-namespace Entities
-{
-class TaskManager
-{
-  private:
+namespace Entities {
+class TaskManager {
+private:
     std::vector<Task> tasks;
     HistoryManager historyManager{};
 
-  public:
+public:
     explicit TaskManager(std::vector<Task> &tasks_, std::stack<Task> uH)
         : tasks(tasks_), historyManager(uH){
 
@@ -23,7 +21,7 @@ class TaskManager
     void RemoveTask(const unsigned int task_id);
     void ChangeStatus(const unsigned int task_id, Status &&s);
     void ChangePriority(const unsigned int task_id, Priority &&p);
-    void Undo();
-    void Redo();
+    // void Undo();
+    // void Redo();
 };
-} // namespace Entities
+}  // namespace Entities

@@ -10,7 +10,7 @@ private:
 
 public:
     UsersRepo(DatabaseManager &db_);
-    void Create(const Entities::Users &entity) override;
+    void Create(const Entities::Users &entity) const override;
     void Update(const Entities::Users &entity) override;
     void Remove(unsigned int entity_id) override;
 };

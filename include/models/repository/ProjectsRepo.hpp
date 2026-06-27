@@ -10,7 +10,7 @@ private:
 
 public:
     ProjectsRepo(DatabaseManager &db_) : db(db_){};
-    void Create(const Entities::Projects &entity) override;
+    void Create(const Entities::Projects &entity) const override;
     // Entities::Projects Find(unsigned int entity_id) override;
     void Update(const Entities::Projects &entity) override;
     void Remove(unsigned int entity_id) override;

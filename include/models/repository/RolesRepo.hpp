@@ -10,7 +10,7 @@ private:
 
 public:
     RolesRepo(DatabaseManager &db_) : db(db_){};
-    void Create(const Entities::Roles &entity) override;
+    void Create(const Entities::Roles &entity) const override;
     void Update(const Entities::Roles &entity) override;
     void Remove(unsigned int entity_id) override;
 };

@@ -2,16 +2,14 @@
 
 namespace Entities {
 
-Task::Task(const Status &status_, const std::string &task_name_, const Priority &priority_,
+Task::Task(const unsigned int task_id_, const std::string &task_name_, const Priority &priority_, const Status &status_,
            const std::string &description_, unsigned int created_by_, unsigned int assigned_to_,
            const std::string &deadline_)
-    : status(status_), task_name(task_name_), priority(priority_), description(description_), created_by(created_by_),
-      assigned_to(assigned_to_), deadline(deadline_) {
-    task_id = ++counter;
-}
+    : task_id(task_id_), status(status_), task_name(task_name_), priority(priority_), description(description_),
+      created_by(created_by_), assigned_to(assigned_to_), deadline(deadline_) {}
 
 Task::Task(const Task &other)
-    : task_id(other.task_id), status(other.status), task_name(other.task_name), priority(other.priority),
+    : task_id(other.task_id), task_name(other.task_name), priority(other.priority), status(other.status),
       description(other.description), created_by(other.created_by), assigned_to(other.assigned_to),
       deadline(other.deadline) {}
 
@@ -20,9 +18,9 @@ Task &Task::operator=(const Task &other) {
         return *this;
 
     task_id = other.task_id;
-    status = other.status;
     task_name = other.task_name;
     priority = other.priority;
+    status = other.status;
     description = other.description;
     created_by = other.created_by;
     assigned_to = other.assigned_to;
@@ -36,9 +34,9 @@ Task &Task::operator=(Task &&other) noexcept {
         return *this;
 
     std::swap(task_id, other.task_id);
-    std::swap(status, other.status);
     std::swap(task_name, other.task_name);
     std::swap(priority, other.priority);
+    std::swap(status, other.status);
     std::swap(description, other.description);
     std::swap(created_by, other.created_by);
     std::swap(assigned_to, other.assigned_to);
@@ -48,7 +46,7 @@ Task &Task::operator=(Task &&other) noexcept {
 }
 
 Task::Task(Task &&other) noexcept
-    : task_id(other.task_id), status(other.status), task_name(other.task_name), priority(other.priority),
+    : task_id(other.task_id), task_name(other.task_name), priority(other.priority), status(other.status),
       description(other.description), created_by(other.created_by), assigned_to(other.assigned_to),
       deadline(other.deadline) {
     other.task_id = 0;
@@ -95,6 +93,39 @@ std::string Task::StatusToString(Status s) {
     }
     return "Unknown";
 }
-unsigned int Task::counter = 0;
+Status Task::StringToStatus(std::string_view queryResult) {
+    if (queryResult == "completed") {
+        return Status::completed;
+    } else if (queryResult == "created") {
+        return Status::created;
+    } else if (queryResult == "in_progress") {
+        return Status::in_progress;
+    } else if (queryResult == "in_review") {
+        return Status::in_review;
+    } else if (queryResult == "rejected") {
+        return Status::rejected;
+    }
+    return Status::created;
+}
 
+Priority Task::StringToPriority(std::string_view queryResult) {
+    if (queryResult == "low") {
+        return Priority::low;
+    } else if (queryResult == "medium") {
+        return Priority::medium;
+    } else if (queryResult == "high") {
+        return Priority::high;
+    } else if (queryResult == "critical") {
+        return Priority::critical;
+    }
+    return Priority::low;
+}
+
+bool Task::operator==(const Task &entity) const {
+    return task_id == entity.task_id && task_name == entity.task_name && priority == entity.priority &&
+           status == entity.status && description == entity.description && created_by == entity.created_by &&
+           assigned_to == entity.assigned_to && deadline == entity.deadline;
+}
+
+bool Task::operator!=(const Task &entity) const { return !(*this == entity); }
 }  // namespace Entities

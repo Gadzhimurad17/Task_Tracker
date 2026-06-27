@@ -3,7 +3,7 @@ namespace Repository {
 
 TaskCommentsRepo::TaskCommentsRepo(DatabaseManager &db_) : db(db_) {}
 
-void TaskCommentsRepo::Create(const Entities::TaskComments &entity) {
+void TaskCommentsRepo::Create(const Entities::TaskComments &entity) const {
     pqxx::work txn(db.GetConn());
 
     const std::string query = R"(

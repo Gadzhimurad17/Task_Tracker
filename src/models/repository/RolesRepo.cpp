@@ -2,7 +2,7 @@
 #include <iostream>
 
 namespace Repository {
-void RolesRepo::Create(const Entities::Roles &entity) {
+void RolesRepo::Create(const Entities::Roles &entity) const {
     try {
         pqxx::work txn(db.GetConn());
         std::string query = R"(
@@ -47,4 +47,5 @@ void RolesRepo::Remove(unsigned int entity_id) {
         throw std::runtime_error("Ошибка удаления роли: " + std::string(e.what()));
     }
 }
+
 }  // namespace Repository

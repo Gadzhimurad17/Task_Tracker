@@ -10,8 +10,8 @@ private:
     DatabaseManager &db;
 
 public:
-    explicit TaskCommentsRepo(DatabaseManager &db_) noexcept;
-    void Create(const Entities::TaskComments &entity) override;
+    TaskCommentsRepo(DatabaseManager &db_);
+    void Create(const Entities::TaskComments &entity) const override;
     void Update(const Entities::TaskComments &entity) override;
     void Remove(unsigned int entity_id) override;
 };

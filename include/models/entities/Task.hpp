@@ -8,7 +8,7 @@ enum class Priority { low = 0, medium = 1, high = 2, critical = 3 };
 
 class Task final {
 private:
-    unsigned int task_id = 0;
+    unsigned int task_id;
     std::string task_name;
     Status status;
     Priority priority;
@@ -18,24 +18,25 @@ private:
     std::string deadline;
 
 public:
-    static unsigned int counter;
-
-    Task(const Status &status_, const std::string &task_name_, const Priority &priority_,
+    Task() = default;
+    Task(const unsigned int task_id_, const std::string &task_name_, const Priority &priority_, const Status &status_,
          const std::string &description_, unsigned int created_by_, unsigned int assigned_to_,
          const std::string &deadline_);
 
     Task(const Task &other);
 
     Task &operator=(const Task &other);
-
+    bool operator!=(const Task &entity) const;
+    bool operator==(const Task &entity) const;
     Task &operator=(Task &&other) noexcept;
 
     Task(Task &&other) noexcept;
 
 public:
     static std::string StatusToString(Status s);
-
+    static Status StringToStatus(std::string_view queryResult);
     static std::string PriorityToString(Priority p);
+    static Priority StringToPriority(std::string_view queryResult);
 
     unsigned int GetTaskId() const;
     Status GetStatus() const;

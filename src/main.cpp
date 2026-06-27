@@ -1,10 +1,6 @@
-#include "controllers/Controller.hpp"
-#include "models/entities/Projects.hpp"
-#include "models/repository/DatabaseManager.hpp"
-#include "models/repository/ProjectsRepo.hpp"
-#include "view/HMenu.hpp"
-#include "view/SideBar.hpp"
-#include "view/View.hpp"
+#include "models/historymanager/HistoryManager.hpp"
+#include "models/repository/TaskRepo.hpp"
+#include "models/services/TaskService.hpp"
 #include <QApplication>
 #include <QDockWidget>
 #include <QHBoxLayout>
@@ -14,7 +10,6 @@
 #include <QScrollBar>
 #include <QTimer>
 #include <QVBoxLayout>
-#include <memory>
 #include <pqxx/pqxx>
 int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
 #if 0
@@ -33,8 +28,18 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
     window.show();
     app.exec();
 #endif
-    Entities::Projects pr(2, "name", "smthng", 2);
-    Repository::DatabaseManager db;
-    Repository::ProjectsRepo repo(db);
-    repo.Create(pr);
+    std::stack<Entities::Task> undoHistory;
+    std::stack<Entities::Task> redoHistory;
+    HistoryManager::HistoryManager historyManager{undoHistory, redoHistory};
+    Repository::DatabaseManager dbmanager;
+    Repository::TaskRepo taskRepo(dbmanager);
+    Services::TaskService ts(historyManager, taskRepo);
+    Entities::Task task(1, "Create new task", Entities::Priority::high, Entities::Status::created,
+                        "Need to create new task", 2, 2, "2026-06-26");
+    ts.Create(task);
+    Entities::Task task2(1, "Create new task and smthng", Entities::Priority::high, Entities::Status::created,
+                         "Need to create new task", 2, 2, "2026-06-26");
+    ts.Update(task2);
+    ts.Undo();
+    ts.Redo();
 }

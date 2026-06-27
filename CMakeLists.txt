@@ -30,6 +30,10 @@ set(SOURCES
     src/models/repository/ProjectsRepo.cpp
     src/models/repository/RolesRepo.cpp
     src/models/repository/DatabaseManager.cpp
+    src/models/historymanager/HistoryManager.cpp
+
+    src/models/services/TaskService.cpp
+
     src/models/repository/TaskRepo.cpp
     src/models/repository/UsersRepo.cpp
 )
@@ -46,13 +50,19 @@ set(HEADERS
     include/models/repository/TaskCommentsRepo.hpp
     include/models/repository/UsersRepo.hpp
 
-    # include/models/historymanager/HistoryManager.hpp
+    include/models/historymanager/HistoryManager.hpp
+    include/models/historymanager/IHistoryManager.hpp
+    include/models/services/IService.hpp
+    include/models/services/TaskService.hpp
+
+    # include/models/historymanager/Undo.hpp
     include/models/entities/Projects.hpp
     include/models/entities/Users.hpp
     include/models/entities/TaskComments.hpp
     include/models/entities/Roles.hpp
     include/models/repository/DatabaseManager.hpp
     include/models/exceptions/CustomExceptions.hpp
+
     include/models/repository/TaskRepo.hpp
 )
 

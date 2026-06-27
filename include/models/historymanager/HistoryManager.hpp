@@ -1,17 +1,29 @@
 #pragma once
+#include "models/entities/Task.hpp"
+#include "models/historymanager/IHistoryManager.hpp"
+#include <iostream>
+#include <memory>
 #include <stack>
-// #include <memory>
-#include "../Task.hpp"
-namespace Entities {
-class HistoryManager {
+
+namespace HistoryManager {
+
+class HistoryManager final : public IHistoryManager<Entities::Task> {
+    std::stack<Entities::Task> undoHistory;
+    std::stack<Entities::Task> redoHistory;
 
 public:
-    std::stack<Task> undoHistory;
-    std::stack<Task> redoHistory;
-    HistoryManager() = default;
-    HistoryManager(std::stack<Task> &uH) : undoHistory(std::move(uH)){};
+    HistoryManager(std::stack<Entities::Task> &uH, std::stack<Entities::Task> &rH)
+        : undoHistory(std::move(uH)), redoHistory(std::move(rH)){};
 
-    void AddInUndo(const Task &task);
-    void AddInRedo(const Task &task);
+    void AddInUndoHistory(const Entities::Task &entity) override;
+    const Entities::Task &GetUndoTop() const override;
+    void PopUndoTop() override;
+    bool UndoIsEmpty() const override;
+
+    void AddInRedoHistory(const Entities::Task &entity) override;
+    const Entities::Task &GetRedoTop() const override;
+    void PopRedoTop() override;
+    bool RedoIsEmpty() const override;
 };
-}  // namespace Entities
+
+}  // namespace HistoryManager
