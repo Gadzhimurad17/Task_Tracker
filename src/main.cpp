@@ -30,7 +30,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
 #endif
     std::stack<Entities::Task> undoHistory;
     std::stack<Entities::Task> redoHistory;
-    HistoryManager::HistoryManager historyManager{undoHistory, redoHistory};
+    HistoryManager::TaskHistoryManager historyManager{undoHistory, redoHistory};
     Repository::DatabaseManager dbmanager;
     Repository::TaskRepo taskRepo(dbmanager);
     Services::TaskService ts(historyManager, taskRepo);

@@ -7,12 +7,12 @@
 
 namespace HistoryManager {
 
-class HistoryManager final : public IHistoryManager<Entities::Task> {
+class TaskHistoryManager final : public IHistoryManager<Entities::Task> {
     std::stack<Entities::Task> undoHistory;
     std::stack<Entities::Task> redoHistory;
 
 public:
-    HistoryManager(std::stack<Entities::Task> &uH, std::stack<Entities::Task> &rH)
+    TaskHistoryManager(std::stack<Entities::Task> &uH, std::stack<Entities::Task> &rH)
         : undoHistory(std::move(uH)), redoHistory(std::move(rH)){};
 
     void AddInUndoHistory(const Entities::Task &entity) override;

@@ -27,5 +27,9 @@ public:
     const std::string &GetLastName() const;
     const std::string &GetSurname() const;
     unsigned int GetRoleId() const;
+
+public:
+    bool operator!=(const Users &entity) const;
+    bool operator==(const Users &entity) const;
 };
 }  // namespace Entities

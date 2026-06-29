@@ -15,8 +15,9 @@ public:
                 Repository::IRepository<Entities::Task> &repository_) noexcept;
     void Create(const Entities::Task &entity) override;
     void Update(const Entities::Task &entity) override;
+    void Remove(unsigned int entity_id) override;
+
     void Undo() override;
     void Redo() override;
-    // void Remove(unsigned int entity_id) override;
 };
 }  // namespace Services

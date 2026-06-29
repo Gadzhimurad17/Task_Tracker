@@ -13,59 +13,79 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCES
     src/main.cpp
 
-    # src/models/TaskManager.cpp
+    # Entities
     src/models/entities/Task.cpp
     src/models/entities/Projects.cpp
     src/models/entities/TaskComments.cpp
     src/models/entities/Roles.cpp
     src/models/entities/Users.cpp
 
-    # src/view/View.cpp
-    # src/view/SideBar.cpp
-
-    # src/repository/PostgresTask.cpp
-    # src/controllers/Controller.cpp
-    # src/models/historymanager/HistoryManager.cpp
+    # Repository
     src/models/repository/TaskCommentsRepo.cpp
     src/models/repository/ProjectsRepo.cpp
     src/models/repository/RolesRepo.cpp
-    src/models/repository/DatabaseManager.cpp
-    src/models/historymanager/HistoryManager.cpp
-
-    src/models/services/TaskService.cpp
-
     src/models/repository/TaskRepo.cpp
     src/models/repository/UsersRepo.cpp
-)
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
-set(HEADERS
-    include/models/entities/Task.hpp
 
-    # include/models/TaskManager.hpp
-    # include/view/View.hpp
-    # include/view/SideBar.hpp
+    # DataBaseManager
+    src/models/repository/DatabaseManager.cpp
+
+    # Authentication
+    src/models/auth/SessionManager.cpp
+
+    # HistoryManager
+    src/models/historymanager/ProjectsHistoryManager.cpp
+    src/models/historymanager/HistoryManager.cpp
+
+    # Services
+    src/models/services/TaskService.cpp
+    src/models/services/RolesService.cpp
+    src/models/services/UsersService.cpp
+    src/models/services/ProjectsService.cpp
+    src/models/services/CommentsService.cpp
+    src/models/services/AuthService.cpp
+)
+
+set(HEADERS
+
+    # Entities
+    include/models/entities/Task.hpp
+    include/models/entities/Projects.hpp
+    include/models/entities/Users.hpp
+    include/models/entities/TaskComments.hpp
+    include/models/entities/Roles.hpp
+
+    # Repository
     include/models/repository/IRepository.hpp
     include/models/repository/ProjectsRepo.hpp
     include/models/repository/RolesRepo.hpp
     include/models/repository/TaskCommentsRepo.hpp
     include/models/repository/UsersRepo.hpp
+    include/models/repository/TaskRepo.hpp
 
+    # DataBaseManager
+    include/models/repository/DatabaseManager.hpp
+
+    # Authentication
+    include/models/auth/SessionManager.hpp
+    include/models/auth/ISessionManager.hpp
+
+    # HistoryManager
     include/models/historymanager/HistoryManager.hpp
     include/models/historymanager/IHistoryManager.hpp
+    include/models/historymanager/UsersHistoryManager.hpp
+
+    # Services
     include/models/services/IService.hpp
     include/models/services/TaskService.hpp
-
-    # include/models/historymanager/Undo.hpp
-    include/models/entities/Projects.hpp
-    include/models/entities/Users.hpp
-    include/models/entities/TaskComments.hpp
-    include/models/entities/Roles.hpp
-    include/models/repository/DatabaseManager.hpp
-    include/models/exceptions/CustomExceptions.hpp
-
-    include/models/repository/TaskRepo.hpp
+    include/models/services/RolesService.hpp
+    include/models/services/CommentsService.hpp
+    include/models/services/UsersService.hpp
+    include/models/services/ProjectsService.hpp
+    include/models/services/AuthService.hpp
 )
 
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 add_executable(TaskManager ${SOURCES} ${HEADERS})
 
 target_include_directories(TaskManager PUBLIC

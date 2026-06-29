@@ -34,8 +34,10 @@ void TaskService::Redo() {
         std::cerr << "История пуста" << std::endl;
     }
     const Entities::Task &&task = std::move(historyManager.GetRedoTop());
-    //historyManager.AddInRedoHistory(repository.Get(task.GetTaskId()).value());
+    // historyManager.AddInRedoHistory(repository.Get(task.GetTaskId()).value());
     repository.Update(task);
     historyManager.PopRedoTop();
 }
+
+void TaskService::Remove(unsigned int entity_id) { repository.Remove(entity_id); }
 }  // namespace Services
