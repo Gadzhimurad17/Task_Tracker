@@ -1,17 +1,17 @@
 #pragma once
-#include "models/entities/Users.hpp"
+#include "models/entities/User.hpp"
 #include "models/repository/DatabaseManager.hpp"
 #include "models/repository/IRepository.hpp"
 
 namespace Repository {
-class UsersRepo : public IRepository<Entities::Users> {
+class UserRepo : public IRepository<Entities::User> {
 private:
     DatabaseManager &db;
 
 public:
-    UsersRepo(DatabaseManager &db_);
-    void Create(const Entities::Users &entity) const override;
-    void Update(const Entities::Users &entity) override;
+    UserRepo(DatabaseManager &db_);
+    void Create(const Entities::User &entity) const override;
+    void Update(const Entities::User &entity) override;
     void Remove(unsigned int entity_id) override;
 };
 }  // namespace Repository

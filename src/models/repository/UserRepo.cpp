@@ -1,8 +1,8 @@
-#include "models/repository/UsersRepo.hpp"
+#include "models/repository/UserRepo.hpp"
 namespace Repository {
-UsersRepo::UsersRepo(DatabaseManager &db_) : db(db_) {}
+UserRepo::UserRepo(DatabaseManager &db_) : db(db_) {}
 
-void UsersRepo::Create(const Entities::Users &entity) const {
+void UserRepo::Create(const Entities::User &entity) const {
     pqxx::work txn(db.GetConn());
 
     std::string query{R"(
@@ -15,7 +15,7 @@ void UsersRepo::Create(const Entities::Users &entity) const {
     txn.commit();
 }
 
-void UsersRepo::Update(const Entities::Users &entity) {
+void UserRepo::Update(const Entities::User &entity) {
     pqxx::work txn(db.GetConn());
 
     std::string query{R"(
@@ -27,7 +27,7 @@ void UsersRepo::Update(const Entities::Users &entity) {
                     entity.GetFirstName(), entity.GetLastName(), entity.GetSurname(), entity.GetRoleId());
     txn.commit();
 }
-void UsersRepo::Remove(unsigned int entity_id) {
+void UserRepo::Remove(unsigned int entity_id) {
     pqxx::work txn(db.GetConn());
 
     std::string query{R"(
